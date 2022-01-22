@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="css/vuetify.min.css" rel="stylesheet">
+    <link href="css/materialdesignicons.min.css" rel="stylesheet">
+    <script src="js/vue.js"></script>
+    <script src="js/vuetify.js"></script>
+    <title>demo</title>
+</head>
+<body>
+<div id="app1">
+    <v-app id="inspire">
+        <v-data-table
+                :headers="headers"
+                :items="desserts"
+                hide-default-footer
+                class="elevation-1"
+        >
+            <template v-slot:top>
+                <v-toolbar
+                        flat
+                >
+                    <v-spacer></v-spacer>
+                    <v-dialog
+                            v-model="dialog"
+                            max-width="500px"
+                    >
+                        <template v-slot:activator="{ on, attrs }">
+                            <v-btn
+                                    color="primary"
+                                    dark
+                                    class="mb-2"
+                                    v-bind="attrs"
+                                    v-on="on"
+                            >
+                                增加数据
+                            </v-btn>
+                        </template>
+                        <v-card>
+                            <v-card-title>
+                                <span class="headline">{{ formTitle }}</span>
+                            </v-card-title>
+
+                            <v-card-text>
+                                <v-container>
+                                    <v-row>
+                                        <v-col
+                                                cols="12"
+                                                sm="6"
+                                                md="4"
+                                        >
+                                            <v-text-field
+                                                    v-model="editedItem.number"
+                                                    label="学号"
+                                            ></v-text-field>
+                                        </v-col>
+                                        <v-col
+                                                cols="12"
+                                                sm="6"
+                                                md="4"
+                                        >
+                                            <v-text-field
+                                                    v-model="editedItem.name"
+                                                    label="姓名"
+                                            ></v-text-field>
+                                        </v-col>
+                                        <v-col
+                                                cols="12"
+                                                sm="6"
+                                                md="4"
+                                        >
+                                            <v-text-field
+                                                    v-model="editedItem.sex"
+                                                    label="性别"
+                                            ></v-text-field>
+                                        </v-col>
+                                        <v-col
+                                                cols="12"
+                                                sm="6"
+                                                md="4"
+                                        >
+                                            <v-text-field
+                                                    v-model="editedItem.class"
+                                                    label="班级"
+                                            ></v-text-field>
+                                        </v-col>
+                                        <v-col
+                                                cols="12"
+                                                sm="6"
+                                                md="4"
+                                        >
+                                            <v-text-field
+                                                    v-model="editedItem.code"
+                                                    label="喜欢的编程语言"
+                                            ></v-text-field>
+                                        </v-col>
+                                        <v-col
+                                                cols="12"
+                                                sm="6"
+                                                md="4"
+                                        >
+                                            <v-text-field
+                                                    v-model="editedItem.hobby"
+                                                    label="爱好"
+                                            ></v-text-field>
+                                        </v-col>
+                                    </v-row>
+                                </v-container>
+                            </v-card-text>
+
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn
+                                        color="blue darken-1"
+                                        text
+                                        @click="close"
+                                >
+                                    取消
+                                </v-btn>
+                                <v-btn
+                                        color="blue darken-1"
+                                        text
+                                        @click="save"
+                                >
+                                    保存
+                                </v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
+                    <v-dialog v-model="dialogDelete" max-width="500px">
+                        <v-card>
+                            <v-card-title class="headline">你确认要删除这条数据吗?</v-card-title>
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn color="blue darken-1" text @click="closeDelete">取消</v-btn>
+                                <v-btn color="blue darken-1" text @click="deleteItemConfirm">确认</v-btn>
+                                <v-spacer></v-spacer>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
+                </v-toolbar>
+            </template>
+            <template v-slot:item.actions="{ item }">
+                <a
+                        class="v-btn blue--text"
+                        @click="editItem(item)"
+                >
+                    编辑
+                </a>
+                <a
+                        class="v-btn red--text"
+                        @click="deleteItem(item)"
+                >
+                    删除
+                </a>
+            </template>
+            <template v-slot:no-data>
+                <v-btn
+                        color="primary"
+                        @click="initialize"
+                >
+                    恢复成原始数据
+                </v-btn>
+            </template>
+        </v-data-table>
+    </v-app>
+</div>
+</body>
+<script>
+    new Vue({
+        el: '#app1',
+        vuetify: new Vuetify(),
+        data: () => ({
+            dialog: false,
+            dialogDelete: false,
+            headers: [
+                {
+                    text: '学号',
+                    align: 'start',
+                    sortable: false,
+                    value: 'number',
+                },
+                { text: '姓名', sortable: false, value: 'name' },
+                { text: '性别', sortable: false, value: 'sex' },
+                { text: '班级', sortable: false, value: 'class' },
+                { text: '喜欢的编程语言', sortable: false, value: 'code' },
+                { text: '爱好',sortable: false, value: 'hobby' },
+                { text: '操作', value: 'actions', sortable: false },
+            ],
+            desserts: [],
+            editedIndex: -1,
+            editedItem: {
+                number: '',
+                name: 0,
+                sex: 0,
+                class: 0,
+                code: 0,
+                hobby:''
+            },
+            defaultItem: {
+                number: '',
+                name: 0,
+                sex: 0,
+                class: 0,
+                code: 0,
+                hobby:''
+            },
+        }),
+
+        computed: {
+            formTitle () {
+                return this.editedIndex === -1 ? '增加数据' : '编辑数据'
+            },
+        },
+
+        watch: {
+            dialog (val) {
+                val || this.close()
+            },
+            dialogDelete (val) {
+                val || this.closeDelete()
+            },
+        },
+
+        created () {
+            this.initialize()
+        },
+
+        methods: {
+            initialize () {
+                this.desserts = [
+                    {
+                        number: '100',
+                        name: "张三",
+                        sex: "女",
+                        class: "186101",
+                        code: "javaScript",
+                        hobby: '看书'
+                    },
+                    {
+                        number: '101',
+                        name: '李四',
+                        sex: '男',
+                        class: "186101",
+                        code: "java",
+                        hobby: '购物'
+                    },
+                    {
+                        number: '102',
+                        name: '赵雨涵',
+                        sex: '女',
+                        class: "180510",
+                        code: "python",
+                        hobby: '化妆'
+                    }
+                ]
+            },
+
+            editItem (item) {
+                this.editedIndex = this.desserts.indexOf(item);
+                this.editedItem = Object.assign({}, item);
+                this.dialog = true
+            },
+
+            deleteItem (item) {
+                this.editedIndex = this.desserts.indexOf(item)
+                this.editedItem = Object.assign({}, item)
+                this.dialogDelete = true
+            },
+
+            deleteItemConfirm () {
+                this.desserts.splice(this.editedIndex, 1)
+                this.closeDelete()
+            },
+
+            close () {
+                this.dialog = false
+                this.$nextTick(() => {
+                    this.editedItem = Object.assign({}, this.defaultItem)
+                    this.editedIndex = -1
+                })
+            },
+
+            closeDelete () {
+                this.dialogDelete = false
+                this.$nextTick(() => {
+                    this.editedItem = Object.assign({}, this.defaultItem)
+                    this.editedIndex = -1
+                })
+            },
+
+            save () {
+                if (this.editedIndex > -1) {
+                    Object.assign(this.desserts[this.editedIndex], this.editedItem)
+                } else {
+                    this.desserts.push(this.editedItem)
+                }
+                this.close()
+            },
+        },
+    });
+</script>
+</html>

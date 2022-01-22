@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="css/zui.min.css" rel="stylesheet">
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/zui.min.js"></script>
+    <script src="js/vuejs-2.5.16.js"></script>
+    <script src="js/axios-0.18.0.js"></script>
+    <title>在线测试</title>
+</head>
+<body>
+<div class="container" id="div_exam">
+    <ul class="nav nav-pills">
+        <li role="presentation"><a href="javascript:void(0)" @click="fun1">退出模块</a></li>
+        <li role="presentation" class="active"><a href="exam.html">测试模块</a></li>
+        <li role="presentation"><a href="comment.html">评论模块</a></li>
+    </ul>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">测试题</h3>
+        </div>
+        <div class="panel-body">
+            <p class="lead">这里一共有四门测试题，分别是政治测试、数学测试题、英语测试题以及计算机专业测试题，
+                每门测试有10个选择题，一个选择题10分，满分100分，祝你考个好成绩！</p>
+        </div>
+    </div>
+
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        政治测试
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                    <form method="post" @submit.prevent="fun2">
+                        <div class="form-group">
+                            <div>1.java的作者是谁？A</div>
+                            <label class="radio-inline">
+                                <input type="radio" name="name1" id="inlineRadio1" v-model="politics.name[0].userAnswer" value="A">James Gosling,
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="name1" id="inlineRadio2"  v-model="politics.name[0].userAnswer" value="B">D.M.Ritchie
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="name1" id="inlineRadio3"  v-model="politics.name[0].userAnswer" value="C">Bjarne Stroustrup
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="name1" id="inlineRadio4"  v-model="politics.name[0].userAnswer" value="D">Guido van Rossum
+                            </label>
+                        </div><hr>
+                        <div class="checkbox">
+                            <div>2. 毛泽东思想形成的时代条件是？B</div>
+                            <label class="radio-inline">
+                                <input type="radio" name="name2" id="inlineRadio2_1" v-model="politics.name[1].userAnswer" value="A">中国沦为半殖民地半封建社会
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="name2" id="inlineRadio2_2" v-model="politics.name[1].userAnswer" value="B">十月革命开辟的世界无产阶级革命新时代
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="name2" id="inlineRadio2_3" v-model="politics.name[1].userAnswer" value="C">第一次世界大战的爆发
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="name2" id="inlineRadio2_4" v-model="politics.name[1].userAnswer" value="D">中国工人阶级的成长壮大
+                            </label>
+                        </div><hr>
+                        <div class="checkbox">
+                            <div>3. 邓小平理论形成的现实依据是？D</div>
+                            <label class="radio-inline">
+                                <input type="radio" name="name3" id="inlineRadio3_1" v-model="politics.name[2].userAnswer" value="A">马列主义，毛泽东思想
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="name3" id="inlineRadio3_2" v-model="politics.name[2].userAnswer" value="B">对当今时代特征和国际形势的科学判断
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="name3" id="inlineRadio3_3" v-model="politics.name[2].userAnswer" value="C">社会主义建设正反两方面历史经验的总结
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="name3" id="inlineRadio3_4" v-model="politics.name[2].userAnswer" value="D">改革开放和现代化建设的实践
+                            </label>
+                        </div><hr>
+                        <div class="checkbox">
+                            <div>4. “三个代表”重要思想创造性地回答了？D</div>
+                            <label class="radio-inline">
+                                <input type="radio" name="name4" id="inlineRadio4_1" v-model="politics.name[3].userAnswer" value="A">什么是马克思主义，怎样坚持和发展马克思主义的问题
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="name4" id="inlineRadio4_2" v-model="politics.name[3].userAnswer" value="B">什么是社会主义，怎样建设社会主义的问题
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="name4" id="inlineRadio4_3" v-model="politics.name[3].userAnswer" value="C">什么是小康社会，怎样建设小康社会
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="name4" id="inlineRadio4_4" v-model="politics.name[3].userAnswer" value="D">建设一个什么样的党，怎样建设党的问题
+                            </label>
+                        </div><hr>
+                        <div class="checkbox">
+                            <div>5. 马克思主义中国化的基本要求是？A</div>
+                            <label class="radio-inline">
+                                <input type="radio" name="name5" id="inlineRadio5_1" v-model="politics.name[4].userAnswer" value="A">把马克思主义基本原理同中国具体实际相结合
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="name5" id="inlineRadio5_2" v-model="politics.name[4].userAnswer" value="B">把马克思主义同外国经验相结合
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="name5" id="inlineRadio5_3" v-model="politics.name[4].userAnswer" value="C">反对教条主义和经验主义
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="name5" id="inlineRadio5_4" v-model="politics.name[4].userAnswer" value="D">坚持调查研究和走群众路线
+                            </label>
+                        </div><hr>
+                        <div class="checkbox">
+                            <div>6. 邓小平理论和毛泽东思想两者之间是？D</div>
+                            <label class="radio-inline">
+                                <input type="radio" name="name6" id="inlineRadio6_1" v-model="politics.name[5].userAnswer" value="A">替代关系
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="name6" id="inlineRadio6_2" v-model="politics.name[5].userAnswer" value="B">继承关系
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="name6" id="inlineRadio6_3" v-model="politics.name[5].userAnswer" value="C">发展关系
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="name6" id="inlineRadio6_4" v-model="politics.name[5].userAnswer" value="D">继承和发展关系
+                            </label>
+                        </div><hr>
+                        <div class="checkbox">
+                            <div>7. 新时期爱国统一战线包括大陆范围内的联盟和大陆范围外的联盟，在这两个联盟中？A</div>
+                            <label class="radio-inline">
+                                <input type="radio" name="name7" id="inlineRadio7_1" v-model="politics.name[6].userAnswer" value="A">大陆范围内的联盟是主体
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="name7" id="inlineRadio7_2" v-model="politics.name[6].userAnswer" value="B">大陆范围外的联盟是主体
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="name7" id="inlineRadio7_3" v-model="politics.name[6].userAnswer" value="C">大陆范围内联盟和大陆范围外联盟都是主体
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="name7" id="inlineRadio7_4" v-model="politics.name[6].userAnswer" value="D">大陆范围外联盟是大陆范围内联盟的基础
+                            </label>
+                        </div><hr>
+                        <div class="checkbox">
+                            <div>8. 社会主义时期的民族问题的实质是？D</div>
+                            <label class="radio-inline">
+                                <input type="radio" name="name8" id="inlineRadio8_1" v-model="politics.name[7].userAnswer" value="A">阶级矛盾问题
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="name8" id="inlineRadio8_2" v-model="politics.name[7].userAnswer" value="B">阶级斗争问题
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="name8" id="inlineRadio8_3" v-model="politics.name[7].userAnswer" value="C">民族冲突问题
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="name8" id="inlineRadio8_4" v-model="politics.name[7].userAnswer" value="D">各族人民根本利益一致基础上的具体的内部矛盾问题
+                            </label>
+                        </div><hr>
+                        <div class="checkbox">
+                            <div>9. 解决我国民族问题的基本原则是？B</div>
+                            <label class="radio-inline">
+                                <input type="radio" name="name9" id="inlineRadio9_1" v-model="politics.name[8].userAnswer" value="A">在少数民族聚居的地方实行民族区域自治
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="name9" id="inlineRadio9_2" v-model="politics.name[8].userAnswer" value="B">坚持民族平等、民族团结和各民族共同繁荣
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="name9" id="inlineRadio9_3" v-model="politics.name[8].userAnswer" value="C">保护和发展民族语言文字，尊重各民族的风俗习惯
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="name9" id="inlineRadio9_4" v-model="politics.name[8].userAnswer" value="D">尊重和保护各民族的宗教信仰自由
+                            </label>
+                        </div><hr>
+                        <div class="checkbox">
+                            <div>10. 中国人民政治协商会议的主要职能，是政治协商和()？D</div>
+                            <label class="radio-inline">
+                                <input type="radio" name="name10" id="inlineRadio10_1" v-model="politics.name[9].userAnswer" value="A">工作监督
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="name10" id="inlineRadio10_2" v-model="politics.name[9].userAnswer" value="B">舆论监督
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="name10" id="inlineRadio10_3" v-model="politics.name[9].userAnswer" value="C">法律监督
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="name10" id="inlineRadio10_4" v-model="politics.name[9].userAnswer" value="D">民主监督
+                            </label>
+                        </div><hr>
+                        <div class="form-group" style="text-align: center">
+                            <input class="btn btn-primary" type="submit" value="提交"/>
+                            <input class="btn btn-default" @click="fun4" type="reset" value="重置"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        数学测试
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="panel-body">
+                    <p class="lead">
+                        待续...
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingThree">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        英语测试
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                <div class="panel-body">
+                    <p class="lead">
+                        待续...
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingFour">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        计算机专业测试
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                <div class="panel-body">
+                    <p class="lead">
+                        待续...
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--成绩提示框-->
+    <div class="modal fade" id="scoreModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span></button>
+                    <h4 class="modal-title">{{politics.object}}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>您本次测试的成绩为：{{politics.score}}，满分100分。</p>
+                    <hr>
+                    <p>答题情况为</p><br>
+
+                    <table class="table-bordered">
+                        <tr>
+                            <td>题号</td>
+                            <td>答题结果</td>
+                        </tr>
+                        <tr v-for="(n,index) in politics.name">
+                            <td>第{{index+1}}题</td>
+                            <td>{{n.msg}}</td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" @click="fun4" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    examVue = new Vue({
+        el:"#div_exam",
+        data:{
+            politics:{
+                object:"政治测试",
+                name:[
+                    {id:1,userAnswer:"",rightAnswer:"A",msg:""},
+                    {id:2,userAnswer:"",rightAnswer:"B",msg:""},
+                    {id:3,userAnswer:"",rightAnswer:"D",msg:""},
+                    {id:4,userAnswer:"",rightAnswer:"D",msg:""},
+                    {id:5,userAnswer:"",rightAnswer:"A",msg:""},
+                    {id:6,userAnswer:"",rightAnswer:"D",msg:""},
+                    {id:7,userAnswer:"",rightAnswer:"A",msg:""},
+                    {id:8,userAnswer:"",rightAnswer:"D",msg:""},
+                    {id:9,userAnswer:"",rightAnswer:"B",msg:""},
+                    {id:10,userAnswer:"",rightAnswer:"D",msg:""}],
+                score:0
+            }
+        },
+        methods:{
+            fun1:function () {
+                window.parent.location.href="index.html";
+            },
+            fun2:function () {
+                for (i in this.politics.name){
+                    console.log(i);
+                    if (this.politics.name[i].userAnswer===this.politics.name[i].rightAnswer){
+                        this.politics.name[i].msg="正确！";
+                        this.politics.score += 10;
+                    }
+                    else{this.politics.name[i].msg="错误！";}
+                }
+                this.fun3();
+                window.parent.loginVue.politics.score = examVue.politics.score;
+            },
+            fun3:function () {
+                $('#scoreModal').modal("show");
+            },
+            fun4:function () {
+                this.politics.score=0;
+                window.parent.loginVue.politics.score = 0;
+            }
+        }
+    });
+
+</script>
+</html>

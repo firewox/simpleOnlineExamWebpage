@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+    http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+
+<!--
+
+    &lt;!&ndash; 使用ContextLoaderListener初始化Spring容器 &ndash;&gt;
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    &lt;!&ndash;  自定义Spring主配置文件的位置 &ndash;&gt;
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext.xml</param-value>
+    </context-param>
+-->
+
+
+<!--
+
+    <filter>
+        <filter-name>character</filter-name>
+        <filter-class>cn.tust.myJavaWork.web.filter.CharacterFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>character</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    &lt;!&ndash;配置Servlet&ndash;&gt;
+    <servlet>
+        <servlet-name>login</servlet-name>
+        <servlet-class>cn.tust.myJavaWork.web.servlet.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>login</servlet-name>
+        <url-pattern>/loginServlet</url-pattern>
+    </servlet-mapping>
+
+    &lt;!&ndash;配置Servlet&ndash;&gt;
+    <servlet>
+        <servlet-name>register</servlet-name>
+        <servlet-class>cn.tust.myJavaWork.web.servlet.RegisterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>register</servlet-name>
+        <url-pattern>/registerUserServlet</url-pattern>
+    </servlet-mapping>
+-->
+
+
+
+<!--
+
+    &lt;!&ndash; 定义Struts 2的FilterDispatcher的Filter &ndash;&gt;
+    <filter>
+        <filter-name>struts2</filter-name>
+        <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+    </filter>
+    &lt;!&ndash; FilterDispatcher用来初始化Struts 2并且处理所有的WEB请求。 &ndash;&gt;
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+-->
+
+
+
+
+
+</web-app>

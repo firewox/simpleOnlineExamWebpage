@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="css/vuetify.min.css" rel="stylesheet">
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/zui.min.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/vuetify.js"></script>
+    <title>XXX小组的网站</title>
+</head>
+<body>
+<div class="container">
+
+    <div class="jumbotron" id="model_1">
+        <h1>Welcome TO XXX小组的网站！</h1>
+        <p>该网站是由我们组的...一起设计的，内容包括我们组的成员基本信息和每个成员的介绍描述，欢迎你来参观！</p>
+            <p>
+                <template>
+                    <div class="text-left ma-2">
+                        <v-btn
+                                dark
+                                @click="snackbar = true"
+                        >
+                            联系我们
+                        </v-btn>
+                        <v-snackbar
+                                v-model="snackbar"
+                                centered
+                        >
+                            {{ text }}
+
+                            <template v-slot:action="{ attrs }">
+                                <v-btn
+                                        color="pink"
+                                        text
+                                        v-bind="attrs"
+                                        @click="snackbar = false"
+                                >
+                                    关闭
+                                </v-btn>
+                            </template>
+                        </v-snackbar>
+                    </div>
+                </template>
+            </p>
+    </div>
+
+    <!--小组介绍-->
+    <div class="panel-group" id="accordion_1" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-primary">
+            <div class="panel-heading" role="tab" id="heading_1">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapse_1" aria-expanded="false" aria-controls="collapse_1">
+                        小组介绍
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse_1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_1">
+                <div class="panel-body">
+                    <template>
+                        <div>
+                            <v-expansion-panels hover>
+                                <v-expansion-panel>
+                                    <v-expansion-panel-header hide-actions>小组分工</v-expansion-panel-header>
+                                    <v-expansion-panel-content>
+                                        <p class="lead">分工详细</p>
+                                    </v-expansion-panel-content>
+                                </v-expansion-panel>
+
+                                <v-expansion-panel>
+                                    <v-expansion-panel-header hide-actions>小组成果展示</v-expansion-panel-header>
+                                    <v-expansion-panel-content>
+                                        <p class="lead">成果展示</p>
+                                    </v-expansion-panel-content>
+                                </v-expansion-panel>
+
+                                <v-expansion-panel>
+                                    <v-expansion-panel-header hide-actions>小组总结</v-expansion-panel-header>
+                                    <v-expansion-panel-content>
+                                        <p class="lead">总结</p>
+                                    </v-expansion-panel-content>
+                                </v-expansion-panel>
+                            </v-expansion-panels>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--信息表-->
+    <div class="panel-group" id="accordion_first" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-primary">
+            <div class="panel-heading" role="tab" id="heading_first">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_first" href="#collapse_first" aria-expanded="false" aria-controls="collapse_first">
+                        成员信息表
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse_first" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_first">
+                <div class="panel-body">
+                    <v-app id="inspire">
+                        <v-data-table
+                                :headers="headers"
+                                :items="desserts"
+                                hide-default-footer
+                                class="elevation-1"
+                        >
+                            <template v-slot:top>
+                                <v-toolbar
+                                        flat
+                                >
+                                    <v-spacer></v-spacer>
+                                    <v-dialog
+                                            v-model="dialog"
+                                            max-width="500px"
+                                    >
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-btn
+                                                    color="primary"
+                                                    dark
+                                                    class="mb-2"
+                                                    v-bind="attrs"
+                                                    v-on="on"
+                                            >
+                                                增加数据
+                                            </v-btn>
+                                        </template>
+                                        <v-card>
+                                            <v-card-title>
+                                                <span class="headline">{{ formTitle }}</span>
+                                            </v-card-title>
+
+                                            <v-card-text>
+                                                <v-container>
+                                                    <v-row>
+                                                        <v-col
+                                                                cols="12"
+                                                                sm="6"
+                                                                md="4"
+                                                        >
+                                                            <v-text-field
+                                                                    v-model="editedItem.number"
+                                                                    label="学号"
+                                                            ></v-text-field>
+                                                        </v-col>
+                                                        <v-col
+                                                                cols="12"
+                                                                sm="6"
+                                                                md="4"
+                                                        >
+                                                            <v-text-field
+                                                                    v-model="editedItem.name"
+                                                                    label="姓名"
+                                                            ></v-text-field>
+                                                        </v-col>
+                                                        <v-col
+                                                                cols="12"
+                                                                sm="6"
+                                                                md="4"
+                                                        >
+                                                            <v-text-field
+                                                                    v-model="editedItem.sex"
+                                                                    label="性别"
+                                                            ></v-text-field>
+                                                        </v-col>
+                                                        <v-col
+                                                                cols="12"
+                                                                sm="6"
+                                                                md="4"
+                                                        >
+                                                            <v-text-field
+                                                                    v-model="editedItem.class"
+                                                                    label="班级"
+                                                            ></v-text-field>
+                                                        </v-col>
+                                                        <v-col
+                                                                cols="12"
+                                                                sm="6"
+                                                                md="4"
+                                                        >
+                                                            <v-text-field
+                                                                    v-model="editedItem.code"
+                                                                    label="喜欢的编程语言"
+                                                            ></v-text-field>
+                                                        </v-col>
+                                                        <v-col
+                                                                cols="12"
+                                                                sm="6"
+                                                                md="4"
+                                                        >
+                                                            <v-text-field
+                                                                    v-model="editedItem.hobby"
+                                                                    label="爱好"
+                                                            ></v-text-field>
+                                                        </v-col>
+                                                    </v-row>
+                                                </v-container>
+                                            </v-card-text>
+
+                                            <v-card-actions>
+                                                <v-spacer></v-spacer>
+                                                <v-btn
+                                                        color="blue darken-1"
+                                                        text
+                                                        @click="close"
+                                                >
+                                                    取消
+                                                </v-btn>
+                                                <v-btn
+                                                        color="blue darken-1"
+                                                        text
+                                                        @click="save"
+                                                >
+                                                    保存
+                                                </v-btn>
+                                            </v-card-actions>
+                                        </v-card>
+                                    </v-dialog>
+                                    <v-dialog v-model="dialogDelete" max-width="500px">
+                                        <v-card>
+                                            <v-card-title class="headline">你确认要删除这条数据吗?</v-card-title>
+                                            <v-card-actions>
+                                                <v-spacer></v-spacer>
+                                                <v-btn color="blue darken-1" text @click="closeDelete">取消</v-btn>
+                                                <v-btn color="blue darken-1" text @click="deleteItemConfirm">确认</v-btn>
+                                                <v-spacer></v-spacer>
+                                            </v-card-actions>
+                                        </v-card>
+                                    </v-dialog>
+                                </v-toolbar>
+                            </template>
+                            <template v-slot:item.actions="{ item }">
+                                <a
+                                        class="v-btn blue--text"
+                                        @click="editItem(item)"
+                                >
+                                    编辑
+                                </a>
+                                <a
+                                        class="v-btn red--text"
+                                        @click="deleteItem(item)"
+                                >
+                                    删除
+                                </a>
+                            </template>
+                            <template v-slot:no-data>
+                                <v-btn
+                                        color="primary"
+                                        @click="initialize"
+                                >
+                                    恢复成原始数据
+                                </v-btn>
+                            </template>
+                        </v-data-table>
+                    </v-app>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--额外功能-->
+    <div class="panel panel-primary">
+        <div class="panel-heading" role="tab" id="heading_zero">
+            <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_zero" aria-expanded="false" aria-controls="collapse_zero">
+                    额外功能
+                </a>
+            </h4>
+        </div>
+        <div id="collapse_zero" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_zero">
+            <div class="panel-body">
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                    HTML 教程
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <p class="lead">
+                                    超文本标记语言（英语：HyperText Markup Language，简称：HTML）是一种用于创建网页的标准标记语言。
+                                    您可以使用 HTML 来建立自己的 WEB 站点，HTML 运行在浏览器上，由浏览器来解析。
+                                    在本教程中，您将学习如何使用 HTML 来创建站点。
+                                    HTML 很容易学习！相信您能很快学会它！
+                                </p>
+                                <p class="lead"><a target="_blank" href="https://www.runoob.com/html/html-tutorial.html">HTML菜鸟教程</a> </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Java 教程
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body">
+                                <p class="lead">
+                                    Java 是由 Sun Microsystems 公司于 1995 年 5 月推出的高级程序设计语言。
+                                    Java 可运行于多个平台，如 Windows, Mac OS 及其他多种 UNIX 版本的系统。
+                                    本教程通过简单的实例将让大家更好的了解 Java 编程语言。
+                                    移动操作系统 Android 大部分的代码采用 Java 编程语言编程。
+                                </p>
+                                <p class="lead"><a target="_blank" href="https://www.runoob.com/java/java-tutorial.html">JAVA菜鸟教程</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingThree">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    JavaScript教程
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                            <div class="panel-body">
+                                <p class="lead">
+                                    JavaScript 是 Web 的编程语言。
+                                    所有现代的 HTML 页面都使用 JavaScript。
+                                    JavaScript 非常容易学。
+                                    本教程将教你学习从初级到高级 JavaScript 知识。
+                                </p>
+                                <p class="lead"><a target="_blank" href="https://www.runoob.com/js/js-tutorial.html">JavaScript菜鸟教程</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingFour">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    Python 3 教程
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                            <div class="panel-body">
+                                <p class="lead">
+                                    Python 的 3.0 版本，常被称为 Python 3000，或简称 Py3k。
+                                    相对于 Python 的早期版本，这是一个较大的升级。为了不带入过多的累赘，
+                                    Python 3.0 在设计的时候没有考虑向下兼容。
+                                    Python 介绍及安装教程我们在Python 2.X 版本的教程中已有介绍，这里就不再赘述。
+                                    你也可以点击 Python2.x与3​​.x版本区别 来查看两者的不同。
+                                    本教程主要针对 Python 3.x 版本的学习，如果你使用的是 Python 2.x 版本请移步至 Python 2.X 版本的教程。
+                                    官方宣布，2020 年 1 月 1 日， 停止 Python 2 的更新。
+                                </p>
+                                <p class="lead"><a target="_blank" href="https://www.runoob.com/python3/python3-tutorial.html">Python3菜鸟教程</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingFive">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    Bootstrap 教程
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+                            <div class="panel-body">
+                                <p class="lead">
+                                    Bootstrap，来自 Twitter，是目前最受欢迎的前端框架。
+                                    Bootstrap 是基于 HTML、CSS、JAVASCRIPT 的，它简洁灵活，使得 Web 开发更加快捷。
+                                    本教程将向您讲解 Bootstrap 框架的基础，通过学习这些内容，
+                                    您将可以轻松地创建 Web 项目。教程被分为 Bootstrap 基本结构、Bootstrap CSS、Bootstrap 布局组件
+                                    和 Bootstrap 插件几个部分。每个部分都包含了与该主题相关的简单有用的实例。
+                                </p>
+                                <p class="lead"><a target="_blank" href="https://www.runoob.com/bootstrap/bootstrap-tutorial.html">Bootstrap菜鸟教程</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingSix">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                    Vue.js 教程
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+                            <div class="panel-body">
+                                <p class="lead">
+                                    Vue.js（读音 /vjuː/, 类似于 view） 是一套构建用户界面的渐进式框架。
+                                    Vue 只关注视图层， 采用自底向上增量开发的设计。
+                                    Vue 的目标是通过尽可能简单的 API 实现响应的数据绑定和组合的视图组件。
+                                    Vue 学习起来非常简单，本教程基于 Vue 2.1.8 版本测试。
+                                </p>
+                                <p class="lead"><a target="_blank" href="https://www.runoob.com/vue2/vue-tutorial.html">Vue.js菜鸟教程</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingSeven">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                    C++ 教程
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+                            <div class="panel-body">
+                                <p class="lead">
+                                    C++ 是一种中级语言，它是由 Bjarne Stroustrup 于 1979 年在贝尔实验室开始设计开发的。
+                                    C++ 进一步扩充和完善了 C 语言，是一种面向对象的程序设计语言。
+                                    C++ 可运行于多种平台上，如 Windows、MAC 操作系统以及 UNIX 的各种版本。
+                                    本教程通过通俗易懂的语言来讲解 C++ 编程语言。
+                                </p>
+                                <p class="lead"><a target="_blank" href="https://www.runoob.com/cplusplus/cpp-tutorial.html">C++ 菜鸟教程</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingEight">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                                    Go 语言教程
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseEight" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEight">
+                            <div class="panel-body">
+                                <p class="lead">
+                                    Go 是一个开源的编程语言，它能让构造简单、可靠且高效的软件变得容易。
+                                    Go是从2007年末由Robert Griesemer, Rob Pike, Ken Thompson主持开发，
+                                    后来还加入了Ian Lance Taylor, Russ Cox等人，
+                                    并最终于2009年11月开源，在2012年早些时候发布了Go 1稳定版本。
+                                    现在Go的开发已经是完全开放的，并且拥有一个活跃的社区。
+                                </p>
+                                <p class="lead"><a target="_blank" href="https://www.runoob.com/go/go-tutorial.html">Go 语言菜鸟教程</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+
+<script>
+    new Vue({
+        el:"#accordion_1",
+        vuetify: new Vuetify()
+    });
+
+    new Vue({
+        el: '#model_1',
+        vuetify: new Vuetify(),
+        data: () => ({
+            snackbar: false,
+            text: '我们的QQ:123456789',
+        }),
+    });
+
+    new Vue({
+        el: '#accordion_first',
+        vuetify: new Vuetify(),
+        data: () => ({
+            dialog: false,
+            dialogDelete: false,
+            headers: [
+                {
+                    text: '学号',
+                    align: 'start',
+                    sortable: false,
+                    value: 'number',
+                },
+                { text: '姓名', sortable: false, value: 'name' },
+                { text: '性别', sortable: false, value: 'sex' },
+                { text: '班级', sortable: false, value: 'class' },
+                { text: '喜欢的编程语言', sortable: false, value: 'code' },
+                { text: '爱好',sortable: false, value: 'hobby' },
+                { text: '操作', value: 'actions', sortable: false },
+            ],
+            desserts: [],
+            editedIndex: -1,
+            editedItem: {
+                number: '',
+                name: '',
+                sex: '',
+                class: '',
+                code:'',
+                hobby:''
+            },
+            defaultItem: {
+                number: '',
+                name: '',
+                sex: '',
+                class: '',
+                code: '',
+                hobby:''
+            },
+        }),
+
+        computed: {
+            formTitle () {
+                return this.editedIndex === -1 ? '增加数据' : '编辑数据'
+            },
+        },
+
+        watch: {
+            dialog (val) {
+                val || this.close()
+            },
+            dialogDelete (val) {
+                val || this.closeDelete()
+            },
+        },
+
+        created () {
+            this.initialize()
+        },
+
+        methods: {
+            initialize () {
+                this.desserts = [
+                    {
+                        number: '100',
+                        name: "张三",
+                        sex: "女",
+                        class: "186101",
+                        code: "javaScript",
+                        hobby: '看书'
+                    },
+                    {
+                        number: '101',
+                        name: '李四',
+                        sex: '男',
+                        class: "186101",
+                        code: "java",
+                        hobby: '购物'
+                    },
+                    {
+                        number: '102',
+                        name: '赵雨涵',
+                        sex: '女',
+                        class: "180510",
+                        code: "python",
+                        hobby: '化妆'
+                    }
+                ]
+            },
+
+            editItem (item) {
+                this.editedIndex = this.desserts.indexOf(item);
+                this.editedItem = Object.assign({}, item);
+                this.dialog = true
+            },
+
+            deleteItem (item) {
+                this.editedIndex = this.desserts.indexOf(item)
+                this.editedItem = Object.assign({}, item)
+                this.dialogDelete = true
+            },
+
+            deleteItemConfirm () {
+                this.desserts.splice(this.editedIndex, 1)
+                this.closeDelete()
+            },
+
+            close () {
+                this.dialog = false
+                this.$nextTick(() => {
+                    this.editedItem = Object.assign({}, this.defaultItem)
+                    this.editedIndex = -1
+                })
+            },
+
+            closeDelete () {
+                this.dialogDelete = false
+                this.$nextTick(() => {
+                    this.editedItem = Object.assign({}, this.defaultItem)
+                    this.editedIndex = -1
+                })
+            },
+
+            save () {
+                if (this.editedIndex > -1) {
+                    Object.assign(this.desserts[this.editedIndex], this.editedItem)
+                } else {
+                    this.desserts.push(this.editedItem)
+                }
+                this.close()
+            },
+        }
+    });
+</script>
+</html>
+

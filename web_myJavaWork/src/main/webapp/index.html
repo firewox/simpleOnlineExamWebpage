@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/zui.min.css" rel="stylesheet">
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/zui.min.js"></script>
+    <script src="js/vuejs-2.5.16.js"></script>
+    <script src="js/axios-0.18.0.js"></script>
+    <title>张梁川的在线学习网站</title>
+</head>
+<body>
+<div class="container" id="div_index">
+    <ul class="nav nav-pills">
+        <li role="presentation" class="active"><a href="index.html">首页模块</a></li>
+        <li role="presentation"><a href="login.html">登录模块</a></li>
+        <li role="presentation"><a href="register.html">注册模块</a></li>
+        <li role="presentation"><a href="javascript:void(0)" @click="fun1">测试模块</a></li>
+        <li role="presentation"><a href="javascript:void(0)" @click="fun1">评论模块</a></li>
+    </ul>
+
+    <div class="jumbotron">
+        <h1>欢迎来到张梁川的学习网站！</h1>
+        <p>该网站主要分为网站主页模块、用户登录注册模块、留言模块、资源下载模块、在线测试模块五个部分。我主要完成了主页模块、用户登录注册模块、留言模块和在线测试模块。欢迎你来学习参观！</p>
+        <p><button id="btn_1" class="btn btn-primary " type="button">联系作者</button></p>
+
+    </div>
+
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        HTML 教程
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                    <p class="lead">
+                        超文本标记语言（英语：HyperText Markup Language，简称：HTML）是一种用于创建网页的标准标记语言。
+                        您可以使用 HTML 来建立自己的 WEB 站点，HTML 运行在浏览器上，由浏览器来解析。
+                        在本教程中，您将学习如何使用 HTML 来创建站点。
+                        HTML 很容易学习！相信您能很快学会它！
+                    </p>
+                    <p class="lead"><a target="_blank" href="https://www.runoob.com/html/html-tutorial.html">HTML菜鸟教程</a> </p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Java 教程
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="panel-body">
+                    <p class="lead">
+                        Java 是由 Sun Microsystems 公司于 1995 年 5 月推出的高级程序设计语言。
+                        Java 可运行于多个平台，如 Windows, Mac OS 及其他多种 UNIX 版本的系统。
+                        本教程通过简单的实例将让大家更好的了解 Java 编程语言。
+                        移动操作系统 Android 大部分的代码采用 Java 编程语言编程。
+                    </p>
+                    <p class="lead"><a target="_blank" href="https://www.runoob.com/java/java-tutorial.html">JAVA菜鸟教程</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingThree">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        JavaScript教程
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                <div class="panel-body">
+                    <p class="lead">
+                        JavaScript 是 Web 的编程语言。
+                        所有现代的 HTML 页面都使用 JavaScript。
+                        JavaScript 非常容易学。
+                        本教程将教你学习从初级到高级 JavaScript 知识。
+                    </p>
+                    <p class="lead"><a target="_blank" href="https://www.runoob.com/js/js-tutorial.html">JavaScript菜鸟教程</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingFour">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        Python 3 教程
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                <div class="panel-body">
+                    <p class="lead">
+                        Python 的 3.0 版本，常被称为 Python 3000，或简称 Py3k。
+                        相对于 Python 的早期版本，这是一个较大的升级。为了不带入过多的累赘，
+                        Python 3.0 在设计的时候没有考虑向下兼容。
+                        Python 介绍及安装教程我们在Python 2.X 版本的教程中已有介绍，这里就不再赘述。
+                        你也可以点击 Python2.x与3​​.x版本区别 来查看两者的不同。
+                        本教程主要针对 Python 3.x 版本的学习，如果你使用的是 Python 2.x 版本请移步至 Python 2.X 版本的教程。
+                        官方宣布，2020 年 1 月 1 日， 停止 Python 2 的更新。
+                    </p>
+                    <p class="lead"><a target="_blank" href="https://www.runoob.com/python3/python3-tutorial.html">Python3菜鸟教程</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingFive">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                        Bootstrap 教程
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+                <div class="panel-body">
+                    <p class="lead">
+                        Bootstrap，来自 Twitter，是目前最受欢迎的前端框架。
+                        Bootstrap 是基于 HTML、CSS、JAVASCRIPT 的，它简洁灵活，使得 Web 开发更加快捷。
+                        本教程将向您讲解 Bootstrap 框架的基础，通过学习这些内容，
+                        您将可以轻松地创建 Web 项目。教程被分为 Bootstrap 基本结构、Bootstrap CSS、Bootstrap 布局组件
+                        和 Bootstrap 插件几个部分。每个部分都包含了与该主题相关的简单有用的实例。
+                    </p>
+                    <p class="lead"><a target="_blank" href="https://www.runoob.com/bootstrap/bootstrap-tutorial.html">Bootstrap菜鸟教程</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingSix">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                        Vue.js 教程
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+                <div class="panel-body">
+                    <p class="lead">
+                        Vue.js（读音 /vjuː/, 类似于 view） 是一套构建用户界面的渐进式框架。
+                        Vue 只关注视图层， 采用自底向上增量开发的设计。
+                        Vue 的目标是通过尽可能简单的 API 实现响应的数据绑定和组合的视图组件。
+                        Vue 学习起来非常简单，本教程基于 Vue 2.1.8 版本测试。
+                    </p>
+                    <p class="lead"><a target="_blank" href="https://www.runoob.com/vue2/vue-tutorial.html">Vue.js菜鸟教程</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingSeven">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                        C++ 教程
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+                <div class="panel-body">
+                    <p class="lead">
+                        C++ 是一种中级语言，它是由 Bjarne Stroustrup 于 1979 年在贝尔实验室开始设计开发的。
+                        C++ 进一步扩充和完善了 C 语言，是一种面向对象的程序设计语言。
+                        C++ 可运行于多种平台上，如 Windows、MAC 操作系统以及 UNIX 的各种版本。
+                        本教程通过通俗易懂的语言来讲解 C++ 编程语言。
+                    </p>
+                    <p class="lead"><a target="_blank" href="https://www.runoob.com/cplusplus/cpp-tutorial.html">C++ 菜鸟教程</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingEight">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                        Go 语言教程
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseEight" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEight">
+                <div class="panel-body">
+                    <p class="lead">
+                        Go 是一个开源的编程语言，它能让构造简单、可靠且高效的软件变得容易。
+                        Go是从2007年末由Robert Griesemer, Rob Pike, Ken Thompson主持开发，
+                        后来还加入了Ian Lance Taylor, Russ Cox等人，
+                        并最终于2009年11月开源，在2012年早些时候发布了Go 1稳定版本。
+                        现在Go的开发已经是完全开放的，并且拥有一个活跃的社区。
+                    </p>
+                    <p class="lead"><a target="_blank" href="https://www.runoob.com/go/go-tutorial.html">Go 语言菜鸟教程</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--提示登录-->
+    <div class="modal fade" id="testModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span></button>
+                    <h4 class="modal-title">警告！</h4>
+                </div>
+                <div class="modal-body">
+                    <p>请先登录！</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    new Vue({
+        el:"#div_index",
+        data:{
+
+        },
+        methods:{
+            fun1:function () {
+                $("#testModal").modal("show");
+            }
+        }
+    });
+    // 点击按钮时显示漂浮消息
+    $('#btn_1').on('click', function() {
+        new $.zui.Messager('作者QQ: 2844281072').show();
+    });
+</script>
+</html>
+

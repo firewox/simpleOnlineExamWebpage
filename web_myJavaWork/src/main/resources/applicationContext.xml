@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!--开启注解的扫描，希望处理service和dao，controller不需要Spring框架去处理-->
+    <context:component-scan base-package="cn.tust.myJavaWork">
+        <!--<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />-->
+    </context:component-scan>
+    <!--Spring整合Hibernate框架-->
+    <!--配置连接池-->
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/test"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+        <property name="connectionTimeout" value="30000"/>
+        <property name="idleTimeout" value="30000"/>
+        <property name="maximumPoolSize" value="10"/>
+        <property name="maxLifetime" value="1800000"/>
+    </bean>
+
+    <!--配置SessionFactory工厂-->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!-- hibernateProperties属性：配置与hibernate相关内容，如显示sql语句，开启正向工程 -->
+        <property name="hibernateProperties">
+            <value>
+                <!-- hibernate.dialect=org.hibernate.dialect.HSQLDialect -->
+                <!-- 显示当前执行的sql -->
+                <!--hibernate.show_sql=true-->
+                <!-- 开启正向工程 -->
+                <!--hibernate.hbm2ddl.auto=update-->
+            </value>
+        </property>
+        <!-- 扫描实体所在的包 -->
+        <property name="packagesToScan">
+            <list>
+                <value>cn.tust.myJavaWork.domain</value>
+            </list>
+        </property>
+    </bean>
+    <!--配置Spring框架声明式事务管理-->
+    <!--配置事务管理器-->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <!--配置事务通知-->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="find*" read-only="true"/>
+            <tx:method name="save*" propagation="REQUIRED" read-only="false"/>
+        </tx:attributes>
+    </tx:advice>
+    <!--配置AOP增强-->
+    <aop:config>
+        <!-- 配置切入点表达式-->
+        <aop:pointcut id="pt1" expression="execution(* cn.tust.myJavaWork.service.impl.*.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="pt1"/>
+    </aop:config>
+
+    <!-- 配置HibernateTemplate对象 -->
+    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <!--<bean id="loginAction" class="cn.tust.myJavaWork.web.action.LoginAction" scope="prototype"></bean>-->
+</beans>

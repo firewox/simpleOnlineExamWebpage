@@ -1,0 +1,13 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <constant name="struts.objectFactory" value="spring" />
+
+
+    <package name="cn.tust.myJavaWork.web.action" namespace="/login" extends="default">
+        <action name="loginAction" class="loginAction">
+            <result>index.html</result>
+        </action>
+    </package>
+</struts>
